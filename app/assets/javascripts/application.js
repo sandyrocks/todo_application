@@ -14,6 +14,12 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require_tree .
+//= require jquery
+//= require jquery_ujs
+//= require jquery-ui
+//= require bootstrap-datepicker/core
+//= require bootstrap-datepicker/locales/bootstrap-datepicker.es
+//= require bootstrap-datepicker/locales/bootstrap-datepicker.fr
 
 /*
 $.ajax({
@@ -50,6 +56,13 @@ $(document).ready(function(){
 			success: function(response){ $('#tasks').html(response); }
 		})
 	})
-})
+	$(document).on("focus", "#task_datepicker", function(e){
+     $('#task_datepicker').datepicker({"format": "yyyy-mm-dd", "weekStart": 1, "autoclose": true});
+    });
+    $(document).on("focus", "#task_endDate", function(e){
+     $('#task_endDate').datepicker({"format": "yyyy-mm-dd", "weekStart": 1, "autoclose": true});
+    });
+});
+
 
 

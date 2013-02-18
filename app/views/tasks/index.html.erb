@@ -4,16 +4,10 @@
 </script>
 <div class="page-header">
 </div>
-<%= select("categories", "category_id", Category.all.collect {|p| [ p.name, p.id ] }, { :include_blank => true }) %>
+
 <div id='tasks'>
-
+<h4>incomplete task</h1>
 <%= render 'index' %>
+<h4>complete task</h1>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_task_path,
-            :class => 'btn btn-primary' %>
-</div>
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_category_path,
-            :class => 'btn btn-primary' %>
 

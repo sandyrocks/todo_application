@@ -5,8 +5,11 @@ class CategoriesController < ApplicationController
   end
   
   def create
-    @user=Category.new(params[:category])
-    if @user.save
+    
+    @category = Category.new(params[:category])
+    @category.user_id =  session[:user_id]
+
+    if @category.save
       redirect_to tasks_path, :notice=> " Category is created "
     else
        render "new"

@@ -46,9 +46,18 @@
           </a>
           <a class="brand" href="#">TodoApplication</a>
           <div class="container-fluid nav-collapse">
-            <ul class="nav">
-              <li>	<%= link_to "Sign up", sign_up_path %></li>
-    		  <li><%= link_to "Log out",log_out_path %></li> 
+            <ul style="float:right" class="nav">
+            <%#= raw(show_signup_or_signout) %>
+              <% if current_user %>
+
+                 <li> <%= link_to 'New Task', new_task_path %></li>    
+                <li> <%= link_to 'New Category', new_category_path %></li>      
+                <li> <%= link_to 'Log Out', session_path(session), :method => :delete %></li>
+                <% else %>
+                      <li> <%= link_to 'SignUp ', new_user_path %></li>
+            <% end %>
+
+    		  <li><%#= link_to "Log out", :method => delete, 'sessions/#{current_user.id}' %></li> 
     	   </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -60,35 +69,46 @@
         <div class="span2">
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
-              <li class="nav-header">Sidebar</li>
-              <li><%= link_to "Link1", "/path1"  %></li>
-              <li><%= link_to "Link2", "/path2"  %></li>
-              <li><%= link_to "Link3", "/path3"  %></li>
+              <% if current_user %>
+              <li class="nav-header">Categories</li>
+              <% unless ( current_user_all_categories.nil? && current_user_all_categories.blank?) %>
+                <% current_user_all_categories.each do |category| %>
+                 <hr>
+                  <li><%= category.name %></li>
+                <% end %>
+              <% end %>
+              <li> </li>
+              <% end %>
             </ul>
           </div><!--/.well -->
         </div><!--/span-->
         <div class="span8">
           <%= bootstrap_flash %>
+          <div class="span10">
           <%= yield %>
+        </div>
         </div>
         <div class="span2">
           <div class="well sidebar-nav">
+                  <% if current_user %>
             <ul class="nav nav-list">
-              <li class="nav-header">Sidebar</li>
-              <li><%= link_to "Link1", "/path1"  %></li>
-             ---------------
-              <hr>
-              <li><%= link_to "Link2", "/path2"  %></li>
-              <li><%= link_to "Link3", "/path3"  %></li>
            
+              <li class="nav-header">Task History</li>
+              <hr>
+              <!--
+              <li>Total Tasks-:<%#= @total_no_of_complete_task %> </li>
+            
+              <hr>
+              <li>Complete task<%#= @completed_tasks.count %></li>
+              <li><%#= link_to "Link3", "/path3"  %></li>
+              -->
+              <%= raw(show_task_counts(@total_no_of_task, @completed_tasks.count,@incomplete_tasks.count))  if @total_no_of_task %>
+              <% end %>
             </ul>
           </div><!--/.well -->
         </div><!--/span-->
       </div><!--/row-->
 
-      <footer>
-        <p>&copy; Company 2012</p>
-      </footer>
 
     </div> <!-- /container -->
 

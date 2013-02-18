@@ -8,8 +8,14 @@
     <div class="controls">
       <%= f.text_field :name, :class => 'text_field' %>
     </div>
-   
-
+   <div id="tasks_datepicker">
+    <%= f.label :StartDate, :class => 'control-label' %>
+    <%= f.text_field :datepicker, :data_behaviour => 'datepicker' %>
+    </div>
+    <div id="tasks_date">
+    <%= f.label :EndDate, :class => 'control-label' %>
+    <%= f.text_field :endDate %>
+    </div>
   </div>
 
   <div class="form-actions">
@@ -19,5 +25,8 @@
   </div>
 <% end %>
 <%= link_to t('.new', :default => t("helpers.links.new")),
-            create_category_path,
+            categories_new_path,
             :class => 'btn btn-primary' %>
+
+
+        

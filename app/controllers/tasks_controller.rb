@@ -1,11 +1,14 @@
 class TasksController < ApplicationController
+
+  before_filter :tasks_counts
+
   # GET /tasks
   # GET /tasks.json
   def index
-    category_id = params[:category_id].present? ? params[:category_id] : 4
-    @completed_tasks = Task.completed_tasks(session[:user_id],category_id)
-    @incomplete_tasks = Task.incomplete_tasks(session[:user_id],category_id)
-    
+    category_id = params[:category_id].present?  
+
+    # tasks_counts
+
     puts request.xhr?
  
     if request.xhr?
@@ -29,7 +32,7 @@ class TasksController < ApplicationController
   # GET /tasks/new.json
   def new
     @task = Task.new
-
+    # tasks_counts
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @task }
@@ -97,6 +100,14 @@ class TasksController < ApplicationController
   
   def category_task
     
+  end
+
+  def tasks_counts
+    category_id = params[:category_id].present? ? params[:category_id] : 4
+    @completed_tasks = Task.completed_tasks(session[:user_id],category_id)
+    @incomplete_tasks = Task.incomplete_tasks(session[:user_id])
+    @incomplete_tasks = Task.incomplete_tasks(session[:user_id])
+    @total_no_of_task = Task.total_no_of_task(session[:user_id]).count
   end
  
 end
