@@ -44,7 +44,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">TodoApplication</a>
+          <%= link_to :TodoApplication, tasks_path, :class => :brand %>
           <div class="container-fluid nav-collapse">
             <ul style="float:right" class="nav">
             <%#= raw(show_signup_or_signout) %>
@@ -57,7 +57,7 @@
                       <li> <%= link_to 'SignUp ', new_user_path %></li>
             <% end %>
 
-    		  <li><%#= link_to "Log out", :method => delete, 'sessions/#{current_user.id}' %></li> 
+    		  
     	   </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -70,11 +70,11 @@
           <div class="well sidebar-nav">
             <ul class="nav nav-list">
               <% if current_user %>
-              <li class="nav-header">Categories</li>
+             Categories
               <% unless ( current_user_all_categories.nil? && current_user_all_categories.blank?) %>
                 <% current_user_all_categories.each do |category| %>
                  <hr>
-                  <li><%= category.name %></li>
+                  <li class='categories_category_id' id= '<%= category.id%>' ><%= category.name %></li>
                 <% end %>
               <% end %>
               <li> </li>
@@ -84,30 +84,28 @@
         </div><!--/span-->
         <div class="span8">
           <%= bootstrap_flash %>
-          <div class="span10">
+          
           <%= yield %>
+       
         </div>
-        </div>
-        <div class="span2">
+      
+
+
+      
+       <div class="span2">
           <div class="well sidebar-nav">
-                  <% if current_user %>
             <ul class="nav nav-list">
-           
               <li class="nav-header">Task History</li>
-              <hr>
-              <!--
-              <li>Total Tasks-:<%#= @total_no_of_complete_task %> </li>
-            
-              <hr>
-              <li>Complete task<%#= @completed_tasks.count %></li>
-              <li><%#= link_to "Link3", "/path3"  %></li>
-              -->
-              <%= raw(show_task_counts(@total_no_of_task, @completed_tasks.count,@incomplete_tasks.count))  if @total_no_of_task %>
+               <% if current_user %>
+        
+              
+              <%= raw(show_task_counts(@total_no_of_task.count, @total_completed_task.count,@total_incomplete_task.count ))  if @total_no_of_task %>
               <% end %>
+           
             </ul>
           </div><!--/.well -->
         </div><!--/span-->
-      </div><!--/row-->
+      </div>
 
 
     </div> <!-- /container -->

@@ -5,7 +5,11 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    category_id = params[:category_id].present?  
+    category_id = params[:category_id].present? ? params[:category_id] : '4' 
+    @completed_tasks = Task.completed_tasks(session[:user_id],category_id)
+    @incomplete_tasks = Task.incomplete_tasks(session[:user_id],category_id)
+    @total_incomplete_task= Task.total_incomplete_task(session[:user_id])
+    @total_completed_task= Task.total_completed_task(session[:user_id])
 
     # tasks_counts
 
@@ -103,11 +107,13 @@ class TasksController < ApplicationController
   end
 
   def tasks_counts
-    category_id = params[:category_id].present? ? params[:category_id] : 4
+      category_id = params[:category_id].present?  
     @completed_tasks = Task.completed_tasks(session[:user_id],category_id)
-    @incomplete_tasks = Task.incomplete_tasks(session[:user_id])
-    @incomplete_tasks = Task.incomplete_tasks(session[:user_id])
-    @total_no_of_task = Task.total_no_of_task(session[:user_id]).count
+    @total_no_of_task = Task.total_no_of_task(session[:user_id])
+    @incomplete_tasks =Task.incomplete_tasks(session[:user_id],category_id)
+    @total_incomplete_task= Task.total_incomplete_task(session[:user_id])
+    @total_completed_task= Task.total_completed_task(session[:user_id])
   end
+
  
 end

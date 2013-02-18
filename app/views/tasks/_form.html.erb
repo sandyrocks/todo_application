@@ -1,20 +1,29 @@
 <%= form_for @task, :html => { :class => 'form-horizontal' } do |f| %>
  <div id="categories">
     	    <%= f.label :CategoryName, :class => 'control-label' %>
+              <div class="controls">
 <%= f.select(:category_id, Category.all.collect {|p| [ p.name, p.id ] }, { :include_blank => true }) %>
 </div>
+</div>
+<br>
   <div class="control-group">
     <%= f.label :name, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :name, :class => 'text_field' %>
     </div>
+   <br>
    <div id="tasks_datepicker">
     <%= f.label :StartDate, :class => 'control-label' %>
+        <div class="controls">
     <%= f.text_field :datepicker, :data_behaviour => 'datepicker' %>
     </div>
+  </div>
+    <br>
     <div id="tasks_date">
     <%= f.label :EndDate, :class => 'control-label' %>
+    <div class="controls">
     <%= f.text_field :endDate %>
+    </div>
     </div>
   </div>
 
@@ -24,9 +33,7 @@
                 tasks_path, :class => 'btn' %>
   </div>
 <% end %>
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            categories_new_path,
-            :class => 'btn btn-primary' %>
+
 
 
         

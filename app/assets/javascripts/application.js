@@ -45,17 +45,26 @@ $(function() {
 		});
 		
 	});
-});
-*/
-
-$(document).ready(function(){
-	$('#categories_category_id').change(function(){
+		$('#categories_category_id').change(function(){
 		$.ajax('tasks.js',
 			{
 			data: { category_id: $('#categories_category_id').val() },
 			success: function(response){ $('#tasks').html(response); }
 		})
 	})
+});
+*/
+
+$(document).ready(function(){
+            $('.categories_category_id').click(function(e){
+
+            var category_id=e.target.id;
+            $.ajax('tasks.js',
+			{
+			data: { category_id:category_id },
+			success: function(response){ $('#tasks').html(response); }
+		})
+            });
 	$(document).on("focus", "#task_datepicker", function(e){
      $('#task_datepicker').datepicker({"format": "yyyy-mm-dd", "weekStart": 1, "autoclose": true});
     });

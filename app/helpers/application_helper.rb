@@ -11,13 +11,12 @@ module ApplicationHelper
 	end
 
 	def show_task_counts(total, completed, incomplete)
+		status = ''
+		['total', 'completed', 'incomplete'].each do |task_status|
 
-		status ="<li>Total Tasks-: #{total} </li>" unless total.nil? 
-        status += "<hr>"
-        status += "<li>Complete task #{completed}</li>" unless completed.nil?
-        status += "<hr>"
-        status += "<li>Incomplete task #{incomplete}</li>" unless incomplete.nil? 
-        return status
+		  status +="<li>#{task_status.capitalize} Tasks-: #{eval(task_status)} </li><hr>" unless eval("#{task_status}.nil?")
+		end
+        status
 	end
 
 

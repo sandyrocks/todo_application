@@ -12,3 +12,10 @@
  *= require_tree .
  *= require bootstrap-datepicker
  */
+
+
+
+li {
+    line-height: 20px;
+    cursor: pointer;
+}
